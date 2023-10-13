@@ -9,9 +9,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $file = "notas.txt";
     
     if (file_put_contents($file, $data, FILE_APPEND | LOCK_EX)) {
-        header("Location: index.html");
+        echo "Datos guardados con éxito.";
     } else {
-        echo "Algo salio mal, intente nuevamente";
+        echo "Algo salió mal, inténtelo de nuevo.";
     }
 } else {
     echo "Acceso no autorizado";
